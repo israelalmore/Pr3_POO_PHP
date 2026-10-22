@@ -36,7 +36,7 @@ class DepositTransactionTest extends TestCase
         $this->expectException(ZeroAmountException::class);
         new DepositTransaction($amount);
     }
-    
+
     /**
      * @test
      * */
@@ -63,5 +63,5 @@ class DepositTransactionTest extends TestCase
             [-0.01],  // Small negative value
             [0]       // Zero amount
         ];
-    }    
+    }
 }
