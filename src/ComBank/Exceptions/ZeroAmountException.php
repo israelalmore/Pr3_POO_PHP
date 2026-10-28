@@ -1,4 +1,6 @@
-<?php namespace ComBank\Exceptions;
+<?php
+
+namespace ComBank\Exceptions;
 
 /**
  * Created by VS Code.
