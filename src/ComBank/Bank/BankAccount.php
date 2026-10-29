@@ -21,7 +21,7 @@ class BankAccount implements BankAccountInterface
     private bool $status;
     private $overdraft;
 
-    public function __construct(float $balance = 0.0)
+    public function __construct(float $balance = 0.0, string $email = "test@gmail.com")
     {
         $this->balance = $balance;
         $this->status = true;
