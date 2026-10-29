@@ -25,4 +25,11 @@ trait AmountValidationTrait
             throw new ZeroAmountException();
         }
     }
+
+    public function validateEmail(String $email): void
+    {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new InvalidArgsException();
+        }
+    }
 }

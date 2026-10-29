@@ -13,6 +13,7 @@ use ComBank\Transactions\DepositTransaction;
 use ComBank\Transactions\WithdrawTransaction;
 use ComBank\Exceptions\BankAccountException;
 use ComBank\Exceptions\FailedTransactionException;
+use ComBank\Exceptions\InvalidArgsException;
 use ComBank\Exceptions\InvalidOverdraftFundsException;
 use ComBank\Exceptions\ZeroAmountException;
 
@@ -102,10 +103,17 @@ try {
     $bankAccount2->transaction(new WithdrawTransaction((20.0)));
 } catch (InvalidOverdraftFundsException $e) {
     pl('Error transaction: ' . $e->getMessage());
+} catch (FailedTransactionException $e) {
+    pl('Error amount: ' . $e->getMessage());
 }
 pl('My new balance after withdrawal (-20) with funds : ' . $bankAccount2->getBalance());
 
 try {
 } catch (BankAccountException $e) {
     pl($e->getMessage());
+}
+try {
+    $bankAccount3 = new BankAccount(100.0, "israelalmore2gmail.com");
+} catch (InvalidArgsException $e) {
+    pl('Account creation rejected due to an invalid email format. ' .  $e->getMessage());
 }
