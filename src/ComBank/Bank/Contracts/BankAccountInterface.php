@@ -28,4 +28,6 @@ interface BankAccountInterface
     public function setStatus($status);
     public function getOverdraft();
     public function applyOverdraft(OverdraftInterface $overdraftInterface);
+    public function getEmail(): string;
+    public function setEmail(String $email);
 }

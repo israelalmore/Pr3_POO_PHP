@@ -128,7 +128,7 @@ class BankAccount implements BankAccountInterface
      *
      * @return  self
      */
-    public function setEmail($email)
+    public function setEmail(String $email)
     {
         $this->email = $email;
 
