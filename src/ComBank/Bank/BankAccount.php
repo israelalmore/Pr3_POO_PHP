@@ -26,7 +26,7 @@ class BankAccount implements BankAccountInterface
 
     use AmountValidationTrait;
 
-    public function __construct(float $balance = 0.0, string $email)
+    public function __construct(float $balance = 0.0, string $email = "test@gmail.com")
     {
         $this->balance = $balance;
         $this->status = true;
