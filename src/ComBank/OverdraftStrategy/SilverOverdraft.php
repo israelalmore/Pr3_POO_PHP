@@ -28,4 +28,9 @@ class SilverOverdraft implements OverdraftInterface
     {
         return 100.00;
     }
+
+    public function getInterestRate(): int
+    {
+        return 5;
+    }
 }
