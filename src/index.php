@@ -8,8 +8,10 @@
  */
 
 use ComBank\Bank\BankAccount;
+use ComBank\OverdraftStrategy\GoldOverdraft;
 use ComBank\OverdraftStrategy\SilverOverdraft;
 use ComBank\Transactions\DepositTransaction;
+use ComBank\Transactions\InterestTransaction;
 use ComBank\Transactions\WithdrawTransaction;
 use ComBank\Exceptions\BankAccountException;
 use ComBank\Exceptions\FailedTransactionException;
@@ -117,6 +119,22 @@ pl('--------- [Start testing bank account #3, No Overdraft] --------');
 
 try {
     $bankAccount3 = new BankAccount(100.0, "israelalmore2gmail.com");
+} catch (InvalidArgsException $e) {
+    pl('Account creation rejected due to an invalid email format. ' .  $e->getMessage());
+}
+
+pl('--------- [Start testing bank account #4, ] --------');
+
+try {
+    $bankAccount4 = new BankAccount(500.0, "goldoverdraft@gmail.com");
+
+    $bankAccount4->applyOverdraft(new GoldOverdraft());
+
+    pl('Interest of the account: ' . $bankAccount4->getOverdraft()->getInterestRate());
+
+    $bankAccount4->transaction(new InterestTransaction());
+
+    pl('New balance after interest transaction: ' . $bankAccount4->getBalance());
 } catch (InvalidArgsException $e) {
     pl('Account creation rejected due to an invalid email format. ' .  $e->getMessage());
 }
