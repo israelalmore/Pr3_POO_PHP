@@ -2,6 +2,8 @@
 
 namespace ComBank\Transactions;
 
+use ComBank\Support\Traits\AmountValidationTrait;
+
 /**
  * Created by VS Code.
  * User: JPortugal
@@ -12,10 +14,6 @@ namespace ComBank\Transactions;
 
 abstract class BaseTransaction
 {
+    use AmountValidationTrait;
     protected $amount;
-
-    public function getAmount(): float
-    {
-        return $this->amount;
-    }
 }

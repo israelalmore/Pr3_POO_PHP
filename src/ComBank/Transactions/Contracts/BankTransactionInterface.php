@@ -10,7 +10,6 @@ namespace ComBank\Transactions\Contracts;
  */
 
 use ComBank\Bank\Contracts\BankAccountInterface;
-use ComBank\Exceptions\InvalidOverdraftFundsException;
 
 interface BankTransactionInterface
 {
@@ -20,4 +19,6 @@ interface BankTransactionInterface
      * Get the value of balance
      */
     public function getTransactionInfo(): string;
+
+    public function getAmount(): float;
 }

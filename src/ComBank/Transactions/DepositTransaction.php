@@ -33,4 +33,9 @@ class DepositTransaction extends BaseTransaction implements BankTransactionInter
     {
         return "DEPOSIT_TRANSACTION";
     }
+
+    public function getAmount(): float
+    {
+        return $this->amount;
+    }
 }

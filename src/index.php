@@ -112,6 +112,9 @@ try {
 } catch (BankAccountException $e) {
     pl($e->getMessage());
 }
+
+pl('--------- [Start testing bank account #3, No Overdraft] --------');
+
 try {
     $bankAccount3 = new BankAccount(100.0, "israelalmore2gmail.com");
 } catch (InvalidArgsException $e) {
