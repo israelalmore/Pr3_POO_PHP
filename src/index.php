@@ -12,6 +12,7 @@ use ComBank\OverdraftStrategy\GoldOverdraft;
 use ComBank\OverdraftStrategy\SilverOverdraft;
 use ComBank\Transactions\DepositTransaction;
 use ComBank\Transactions\InterestTransaction;
+use ComBank\Transactions\TransferTransaction;
 use ComBank\Transactions\WithdrawTransaction;
 use ComBank\Exceptions\BankAccountException;
 use ComBank\Exceptions\FailedTransactionException;
@@ -137,4 +138,44 @@ try {
     pl('New balance after interest transaction: ' . $bankAccount4->getBalance());
 } catch (InvalidArgsException $e) {
     pl('Account creation rejected due to an invalid email format. ' .  $e->getMessage());
+}
+
+pl('--------- [Start testing bank account #5, ] --------');
+
+try {
+    $bankAccount5 = new BankAccount(500.0, "transactionaccount@gmail.com");
+    pl('Account balance 1: ' . $bankAccount5->getBalance());
+    $bankAccount6 = new BankAccount(200.0, "transactionaccount2@gmail.com");
+    pl('Account balance 2: ' . $bankAccount6->getBalance());
+
+    $bankAccount5->transaction(new TransferTransaction($bankAccount6, 100));
+
+    pl('Transaction of 100 from Account 1 to Account 2:');
+
+    pl('New account balance 1: ' . $bankAccount5->getBalance());
+    pl('New account balance 2: ' . $bankAccount6->getBalance());
+} catch (InvalidArgsException $e) {
+    pl('Account creation rejected due to an invalid email format. ' .  $e->getMessage());
+}
+
+pl('--------- [Start testing bank account #6, ] --------');
+
+$bankAccount7 = new BankAccount(50.0);
+pl('Account balance 1: ' . $bankAccount7->getBalance());
+$bankAccount8 = new BankAccount(200.0);
+pl('Account balance 2: ' . $bankAccount8->getBalance());
+
+try {
+    pl('Transaction of 100 from Account 1 to Account 2');
+
+    $bankAccount7->transaction(new TransferTransaction($bankAccount8, 100));
+
+    pl('New account balance 1: ' . $bankAccount7->getBalance());
+    pl('New account balance 2: ' . $bankAccount8->getBalance());
+} catch (FailedTransactionException $e) {
+    pl('New account balance 1: ' . $bankAccount7->getBalance());
+    pl('New account balance 2: ' . $bankAccount8->getBalance());
+    pl('Transfer rejected when the source account has insufficient available funds. ' . $e->getMessage());
+} catch (ZeroAmountException $e) {
+    pl($e->getMessage());
 }
